@@ -1,9 +1,8 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.natamus.recipecommands.forge.mixin",
+  "package": "com.natamus.recipecommands.mixin",
   "compatibilityLevel": "JAVA_17",
-  "refmap": "recipecommands_forge.refmap.json",
   "mixins": [
 
   ],

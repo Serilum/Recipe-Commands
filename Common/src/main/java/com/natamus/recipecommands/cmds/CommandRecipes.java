@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.natamus.collective.functions.MessageFunctions;
 import com.natamus.collective.functions.StringFunctions;
 import com.natamus.recipecommands.util.Recipes;
 import net.minecraft.ChatFormatting;
@@ -42,7 +43,7 @@ public class CommandRecipes {
 					sendRecipe(command);
 				}
 				catch (CommandSyntaxException ex) {
-					StringFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
+					MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
 				}
 				return 1;
 			}))
@@ -63,7 +64,7 @@ public class CommandRecipes {
 						sendRecipe(command);
 					}
 					catch (CommandSyntaxException ex) {
-						StringFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
+						MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
 					}
 					return 1;
 				}))
@@ -71,8 +72,8 @@ public class CommandRecipes {
 	}
 	
 	private static void sendUsage(CommandSourceStack source) {
-		StringFunctions.sendMessage(source, "Recipe Commands Usage:", ChatFormatting.DARK_GREEN);
-		StringFunctions.sendMessage(source, " /rec <recipe>", ChatFormatting.DARK_GREEN);
+		MessageFunctions.sendMessage(source, "Recipe Commands Usage:", ChatFormatting.DARK_GREEN);
+		MessageFunctions.sendMessage(source, " /rec <recipe>", ChatFormatting.DARK_GREEN);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -161,8 +162,8 @@ public class CommandRecipes {
 		String outputname = output.getItem().toString();
 		outputname = StringFunctions.capitalizeEveryWord(outputname.replace("_", " "));
 		
-		StringFunctions.sendMessage(source, outputname + " has a " + shape + " recipe.", ChatFormatting.DARK_GREEN, true);
-		StringFunctions.sendMessage(source, " Ingredients:", ChatFormatting.DARK_GREEN);
+		MessageFunctions.sendMessage(source, outputname + " has a " + shape + " recipe.", ChatFormatting.DARK_GREEN, true);
+		MessageFunctions.sendMessage(source, " Ingredients:", ChatFormatting.DARK_GREEN);
 		for (String itemname : items) {
 			int count = itemcount.get(itemname);
 			String todisplayname = itemname;
@@ -176,18 +177,18 @@ public class CommandRecipes {
 			
 			todisplayname = todisplayname.replace("_", " ");
 			
-			StringFunctions.sendMessage(source, "  " + count + "x " + todisplayname, ChatFormatting.DARK_GREEN);
+			MessageFunctions.sendMessage(source, "  " + count + "x " + todisplayname, ChatFormatting.DARK_GREEN);
 		}
 		
 		if (shape.equalsIgnoreCase("shaped") && pattern != null) {
 			if (pattern.size() > 0) {
-				StringFunctions.sendMessage(source, " Pattern:", ChatFormatting.DARK_GREEN);
+				MessageFunctions.sendMessage(source, " Pattern:", ChatFormatting.DARK_GREEN);
 				
 				for (String line : pattern) {
 					for (String toreplace : Recipes.replacekeys.keySet()) {
 						line = line.replaceAll(toreplace, Recipes.replacekeys.get(toreplace));
 					}
-					StringFunctions.sendMessage(source, "  " + line.replace(" ", "_"), ChatFormatting.DARK_GREEN);
+					MessageFunctions.sendMessage(source, "  " + line.replace(" ", "_"), ChatFormatting.DARK_GREEN);
 				}
 			}
 		}
