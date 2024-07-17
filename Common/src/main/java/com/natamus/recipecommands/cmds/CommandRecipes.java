@@ -42,7 +42,7 @@ public class CommandRecipes {
 				try {
 					sendRecipe(command);
 				}
-				catch (CommandSyntaxException ex) {
+				catch (Exception ex) {
 					MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
 				}
 				return 1;
@@ -52,56 +52,56 @@ public class CommandRecipes {
 				.requires((iCommandSender) -> iCommandSender.getEntity() instanceof ServerPlayer)
 				.executes((command) -> {
 					CommandSourceStack source = command.getSource();
-					
+
 					sendUsage(source);
 					return 1;
 				})
 				.then(Commands.argument("recipe", ResourceLocationArgument.id()).suggests(SuggestionProviders.ALL_RECIPES)
 				.executes((command) -> {
 					CommandSourceStack source = command.getSource();
-					
+
 					try {
 						sendRecipe(command);
 					}
-					catch (CommandSyntaxException ex) {
+					catch (Exception ex) {
 						MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
 					}
 					return 1;
 				}))
 			);
 	}
-	
+
 	private static void sendUsage(CommandSourceStack source) {
 		MessageFunctions.sendMessage(source, "Recipe Commands Usage:", ChatFormatting.DARK_GREEN);
 		MessageFunctions.sendMessage(source, " /rec <recipe>", ChatFormatting.DARK_GREEN);
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	private static void sendRecipe(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
+	private static void sendRecipe(CommandContext<CommandSourceStack> command) throws CommandSyntaxException, NoSuchMethodError {
 		CommandSourceStack source = command.getSource();
 		Player player = source.getPlayerOrException();
 		Level level = player.level();
 		if (level.isClientSide) {
 			return;
 		}
-		
+
 		RecipeHolder<?> recipeHolder = ResourceLocationArgument.getRecipe(command, "recipe");
 		Recipe<?> recipe = recipeHolder.value();
 		String recipeName = recipeHolder.toString();
 		if (recipeName.contains(":")) {
 			recipeName = recipeName.split(":")[1];
 		}
-		
+
 		List<String> items = new ArrayList<String>();
 		HashMap<String, Integer> itemcount = new HashMap<String, Integer>();
-		
+
 		List<Ingredient> ingredients = recipe.getIngredients();
 		for (Ingredient ingredient : ingredients) {
 			ItemStack[] possiblestacks = ingredient.getItems();
 			if (possiblestacks.length == 0) {
 				continue;
 			}
-			
+
 			ItemStack itemstack = possiblestacks[0];
 			Item item = itemstack.getItem();
 			String itemname = item.toString();
@@ -112,12 +112,11 @@ public class CommandRecipes {
 					itemname = tag.location().getPath();
 				}
 			}
-			
+
 			itemname = StringFunctions.capitalizeEveryWord(itemname);
-			
+
 			if (items.contains(itemname)) {
-				int currentcount = itemcount.get(itemname);
-				itemcount.put(itemname, currentcount+1);
+				itemcount.compute(itemname, (k, currentcount) -> currentcount + 1);
 				continue;
 			}
 			
