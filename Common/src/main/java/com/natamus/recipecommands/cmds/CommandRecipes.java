@@ -42,7 +42,7 @@ public class CommandRecipes {
 				try {
 					sendRecipe(command);
 				}
-				catch (CommandSyntaxException ex) {
+				catch (Exception ex) {
 					MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
 				}
 				return 1;
@@ -63,7 +63,7 @@ public class CommandRecipes {
 					try {
 						sendRecipe(command);
 					}
-					catch (CommandSyntaxException ex) {
+					catch (Exception ex) {
 						MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
 					}
 					return 1;
@@ -77,14 +77,14 @@ public class CommandRecipes {
 	}
 	
 	@SuppressWarnings("unchecked")
-	private static void sendRecipe(CommandContext<CommandSourceStack> command) throws CommandSyntaxException {
+	private static void sendRecipe(CommandContext<CommandSourceStack> command) throws CommandSyntaxException, NoSuchMethodError {
 		CommandSourceStack source = command.getSource();
 		Player player = source.getPlayerOrException();
 		Level level = player.level();
 		if (level.isClientSide) {
 			return;
 		}
-		
+
 		RecipeHolder<?> recipeHolder = ResourceLocationArgument.getRecipe(command, "recipe");
 		Recipe<?> recipe = recipeHolder.value();
 		String recipeName = recipeHolder.toString();
@@ -116,8 +116,7 @@ public class CommandRecipes {
 			itemname = StringFunctions.capitalizeEveryWord(itemname);
 			
 			if (items.contains(itemname)) {
-				int currentcount = itemcount.get(itemname);
-				itemcount.put(itemname, currentcount+1);
+				itemcount.compute(itemname, (k, currentcount) -> currentcount + 1);
 				continue;
 			}
 			
