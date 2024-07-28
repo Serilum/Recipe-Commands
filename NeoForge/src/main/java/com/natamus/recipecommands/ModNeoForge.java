@@ -1,6 +1,7 @@
 package com.natamus.recipecommands;
 
 import com.natamus.collective.check.RegisterMod;
+import com.natamus.collective.check.ShouldLoadCheck;
 import com.natamus.recipecommands.neoforge.events.NeoForgeCommandRegisterEvent;
 import com.natamus.recipecommands.util.Reference;
 import net.neoforged.neoforge.common.NeoForge;
@@ -12,6 +13,10 @@ import net.neoforged.fml.event.lifecycle.FMLLoadCompleteEvent;
 public class ModNeoForge {
 	
 	public ModNeoForge(IEventBus modEventBus) {
+		if (!ShouldLoadCheck.shouldLoad(Reference.MOD_ID)) {
+			return;
+		}
+
 		modEventBus.addListener(this::loadComplete);
 
 		setGlobalConstants();
