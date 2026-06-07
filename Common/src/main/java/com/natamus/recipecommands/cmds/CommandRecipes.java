@@ -1,4 +1,5 @@
 package com.natamus.recipecommands.cmds;
+import com.natamus.recipecommands.util.Reference;
 
 import com.google.gson.Gson;
 import com.mojang.brigadier.CommandDispatcher;
@@ -46,7 +47,7 @@ public class CommandRecipes {
 					sendRecipe(command);
 				}
 				catch (Exception ex) {
-					MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
+					MessageFunctions.sendTranslatableMessage(source, "collective.recipecommands.message.unablefindrecipe", ChatFormatting.RED);
 				}
 				return 1;
 			}))
@@ -67,7 +68,7 @@ public class CommandRecipes {
 						sendRecipe(command);
 					}
 					catch (Exception ex) {
-						MessageFunctions.sendMessage(source, "Unable to find recipe.", ChatFormatting.RED);
+						MessageFunctions.sendTranslatableMessage(source, "collective.recipecommands.message.unablefindrecipe", ChatFormatting.RED);
 					}
 					return 1;
 				}))
@@ -75,7 +76,7 @@ public class CommandRecipes {
 	}
 	
 	private static void sendUsage(CommandSourceStack source) {
-		MessageFunctions.sendMessage(source, "Recipe Commands Usage:", ChatFormatting.DARK_GREEN);
+		MessageFunctions.sendTranslatableMessage(source, "collective.shared.message.usage", ChatFormatting.DARK_GREEN, Reference.NAME);
 		MessageFunctions.sendMessage(source, " /rec <recipe>", ChatFormatting.DARK_GREEN);
 	}
 	
@@ -196,8 +197,8 @@ public class CommandRecipes {
 
 		String formattedOutputName = StringFunctions.capitalizeEveryWord(outputName.replace("_", " "));
 		
-		MessageFunctions.sendMessage(source, formattedOutputName + " has a " + shape + " recipe.", ChatFormatting.DARK_GREEN, true);
-		MessageFunctions.sendMessage(source, " Ingredients:", ChatFormatting.DARK_GREEN);
+		MessageFunctions.sendTranslatableMessage(source, "collective.recipecommands.message.recipe", true, ChatFormatting.DARK_GREEN, formattedOutputName, shape);
+		MessageFunctions.sendTranslatableMessage(source, " ", "collective.recipecommands.message.ingredients", ChatFormatting.DARK_GREEN);
 		for (String itemname : items) {
 			int count = itemcount.get(itemname);
 			String todisplayname = itemname;
@@ -211,12 +212,12 @@ public class CommandRecipes {
 			
 			todisplayname = todisplayname.replace("_", " ");
 			
-			MessageFunctions.sendMessage(source, "  " + count + "x " + todisplayname, ChatFormatting.DARK_GREEN);
+			MessageFunctions.sendTranslatableMessage(source, "  ", "collective.recipecommands.message.x", ChatFormatting.DARK_GREEN, count, todisplayname);
 		}
 		
 		if (shape.equalsIgnoreCase("shaped") && pattern != null) {
 			if (pattern.size() > 0) {
-				MessageFunctions.sendMessage(source, " Pattern:", ChatFormatting.DARK_GREEN);
+				MessageFunctions.sendTranslatableMessage(source, " ", "collective.recipecommands.message.pattern", ChatFormatting.DARK_GREEN);
 				
 				for (String line : pattern) {
 					for (String toreplace : Recipes.replacekeys.keySet()) {
