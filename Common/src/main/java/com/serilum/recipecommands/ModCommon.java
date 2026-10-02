@@ -1,7 +1,7 @@
-package com.natamus.recipecommands;
+package com.serilum.recipecommands;
 
 
-import com.natamus.recipecommands.util.Recipes;
+import com.serilum.recipecommands.util.Recipes;
 
 public class ModCommon {
 

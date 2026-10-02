@@ -1,9 +1,9 @@
-package com.natamus.recipecommands;
+package com.serilum.recipecommands;
 
 import com.natamus.collective.check.RegisterMod;
 import com.natamus.collective.check.ShouldLoadCheck;
-import com.natamus.recipecommands.cmds.CommandRecipes;
-import com.natamus.recipecommands.util.Reference;
+import com.serilum.recipecommands.cmds.CommandRecipes;
+import com.serilum.recipecommands.util.Reference;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 
