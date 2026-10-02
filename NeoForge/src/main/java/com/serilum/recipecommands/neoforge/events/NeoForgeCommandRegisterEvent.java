@@ -1,6 +1,6 @@
-package com.natamus.recipecommands.neoforge.events;
+package com.serilum.recipecommands.neoforge.events;
 
-import com.natamus.recipecommands.cmds.CommandRecipes;
+import com.serilum.recipecommands.cmds.CommandRecipes;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 

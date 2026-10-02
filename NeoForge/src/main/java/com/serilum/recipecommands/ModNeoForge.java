@@ -1,9 +1,9 @@
-package com.natamus.recipecommands;
+package com.serilum.recipecommands;
 
 import com.natamus.collective.check.RegisterMod;
 import com.natamus.collective.check.ShouldLoadCheck;
-import com.natamus.recipecommands.neoforge.events.NeoForgeCommandRegisterEvent;
-import com.natamus.recipecommands.util.Reference;
+import com.serilum.recipecommands.neoforge.events.NeoForgeCommandRegisterEvent;
+import com.serilum.recipecommands.util.Reference;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
