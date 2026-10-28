@@ -1,6 +1,6 @@
-package com.natamus.recipecommands.forge.events;
+package com.serilum.recipecommands.forge.events;
 
-import com.natamus.recipecommands.cmds.CommandRecipes;
+import com.serilum.recipecommands.cmds.CommandRecipes;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.bus.BusGroup;
 import net.minecraftforge.eventbus.api.listener.SubscribeEvent;
@@ -14,8 +14,8 @@ public class ForgeCommandRegisterEvent {
 		RegisterCommandsEvent.BUS.addListener(ForgeCommandRegisterEvent::registerCommands);
 	}
 
-    @SubscribeEvent
-    public static void registerCommands(RegisterCommandsEvent e) {
-    	CommandRecipes.register(e.getDispatcher());
-    }
+	@SubscribeEvent
+	public static void registerCommands(RegisterCommandsEvent e) {
+		CommandRecipes.register(e.getDispatcher());
+	}
 }

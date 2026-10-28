@@ -1,4 +1,4 @@
-package com.natamus.recipecommands.util;
+package com.serilum.recipecommands.util;
 
 import java.util.HashMap;
 

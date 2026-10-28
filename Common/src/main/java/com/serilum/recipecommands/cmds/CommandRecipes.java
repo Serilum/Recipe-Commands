@@ -1,5 +1,5 @@
-package com.natamus.recipecommands.cmds;
-import com.natamus.recipecommands.util.Reference;
+package com.serilum.recipecommands.cmds;
+import com.serilum.recipecommands.util.Reference;
 
 import com.google.gson.Gson;
 import com.mojang.brigadier.CommandDispatcher;
@@ -7,7 +7,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.natamus.collective.functions.MessageFunctions;
 import com.natamus.collective.functions.StringFunctions;
-import com.natamus.recipecommands.util.Recipes;
+import com.serilum.recipecommands.util.Recipes;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
